@@ -8,7 +8,7 @@
   },
   "deploy": {
     "numReplicas": 1,
-    "startCommand": "streamlit run streamlit_app.py",
+    "startCommand": "streamlit run qa_multi_text_or_pdf.py",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }
