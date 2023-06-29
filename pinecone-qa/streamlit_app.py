@@ -14,17 +14,18 @@ st.subheader('Generative Q&A with LangChain & Pinecone')
 # Get OpenAI API key, Pinecone API key and environment, and source document input
 with st.sidebar:
     PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+    PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
+    PINECONE_INDEX = os.getenv("PINECONE_INDEX")
     openai_api_key = st.text_input("OpenAI API key", type="password")
-    pinecone_api_key = st.text_input(PINECONE_API_KEY, type="password")        
-
-    pinecone_env = st.text_input("{}".format(PINECONE_API_KEY))
-    pinecone_index = st.text_input("Pinecone index name")
+    pinecone_api_key = st.text_input("{}".format(PINECONE_API_KEY), type="password")        
+    pinecone_env = st.text_input("{}".format(PINECONE_ENVIRONMENT))
+    pinecone_index = st.text_input("{}".format(PINECONE_INDEX))
 source_doc = st.file_uploader("Upload source document", type="pdf", label_visibility="collapsed")
 query = st.text_input("Enter your query")
 
 if st.button("Submit"):
     # Validate inputs
-    if not openai_api_key or not pinecone_api_key or not pinecone_env or not pinecone_index or not source_doc or not query:
+    if not openai_api_key or not pinecone_api_key or not pinecone_env or not pinecone_index or not query:
         st.warning(f"Please upload the document and provide the missing fields.")
     else:
         try:
