@@ -2,6 +2,7 @@ from sentence_transformers import SentenceTransformer
 import pinecone
 import openai
 import streamlit as st
+import os
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
