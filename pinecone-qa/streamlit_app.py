@@ -48,7 +48,10 @@ if st.button("Submit"):
             qa = RetrievalQA.from_chain_type(llm, chain_type="stuff", retriever=retriever)
             response = qa.run(query)
             
-            st.success(response)         
+            st.success(response)      
+                    
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
     else:
         try:
             # initialize the vector data store
