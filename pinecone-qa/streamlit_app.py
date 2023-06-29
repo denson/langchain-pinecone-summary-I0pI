@@ -28,7 +28,7 @@ if st.button("Submit"):
     if not openai_api_key or not pinecone_api_key or not pinecone_env or not pinecone_index or not query:
         st.warning(f"Please upload the document and provide the missing fields.")
 
-    elif: source_doc:
+    elif source_doc:
         try:
             # Save uploaded file temporarily to disk, load and split the file into pages, delete temp file
             with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
