@@ -17,9 +17,9 @@ with st.sidebar:
     PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
     PINECONE_INDEX = os.getenv("PINECONE_INDEX")
     openai_api_key = st.text_input("OpenAI API key", type="password")
-    pinecone_api_key = st.text_input("{}".format(PINECONE_API_KEY), type="password")        
-    pinecone_env = st.text_input("{}".format(PINECONE_ENVIRONMENT))
-    pinecone_index = st.text_input("{}".format(PINECONE_INDEX))
+    pinecone_api_key = st.text_input("PINECONE_API_KEY", value="{}".format(PINECONE_API_KEY), type="password")        
+    pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value="{}".format(PINECONE_ENVIRONMENT))
+    pinecone_index = st.text_input("PINECONE_INDEX", value="{}".format(PINECONE_INDEX))
 source_doc = st.file_uploader("Upload source document", type="pdf", label_visibility="collapsed")
 query = st.text_input("Enter your query")
 
