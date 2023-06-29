@@ -6,7 +6,7 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import PyPDFLoader
 
-moved where the environment variable is pulled
+
 
 # Streamlit app
 st.subheader('Generative Q&A with LangChain & Pinecone')
