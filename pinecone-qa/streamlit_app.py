@@ -16,7 +16,7 @@ with st.sidebar:
     PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
     openai_api_key = st.text_input("OpenAI API key", type="password")
     pinecone_api_key = st.text_input(PINECONE_API_KEY, type="password")        
-    pinecone_api_key = st.text_input(PINECONE_API_KEY, type="password")
+
     pinecone_env = st.text_input("{}".format(PINECONE_API_KEY))
     pinecone_index = st.text_input("Pinecone index name")
 source_doc = st.file_uploader("Upload source document", type="pdf", label_visibility="collapsed")
