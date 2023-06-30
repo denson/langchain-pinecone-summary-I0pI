@@ -52,15 +52,18 @@ def get_conversation_string():
     return conversation_string
 
 def main():
+
+    PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+    PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
+    PINECONE_INDEX = os.getenv("PINECONE_INDEX")
+    
     st.set_page_config(layout="wide")
     st.title("Chatbot with Langchain, ChatGPT, Pinecone, and Streamlit")
 
     st.subheader("Chatbot with Langchain, ChatGPT, Pinecone, and Streamlit")
     ### credentials
     with st.sidebar:
-        PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-        PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
-        PINECONE_INDEX = os.getenv("PINECONE_INDEX")
+
         pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
         index = pinecone.Index(PINECONE_INDEX)
         openai_api_key = st.text_input("OpenAI API key", type="password")
