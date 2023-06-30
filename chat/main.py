@@ -64,13 +64,21 @@ def main():
     ### credentials
     with st.sidebar:
 
+
+        openai_api_key = st.text_input("OpenAI API key", type="password")
+        prefill_pinecone_api_key = "{}".format(PINECONE_API_KEY)
+        prefill_pinecone_environment = "{}".format(PINECONE_ENVIRONMENT)
+        prefill_pinecone_index = "{}".format(PINECONE_INDEX)
+
+        st.write(prefill_pinecone_api_key)
+        pinecone_api_key = st.text_input("PINECONE_API_KEY", value=prefill_pinecone_api_key)    
+        st.write(prefill_pinecone_environment)    
+        pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value=prefill_pinecone_environment)
+        st.write(prefill_pinecone_index) 
+        pinecone_index = st.text_input("PINECONE_INDEX", value=prefill_pinecone_index)
+
         pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
         index = pinecone.Index(PINECONE_INDEX)
-        openai_api_key = st.text_input("OpenAI API key", type="password")
-        pinecone_api_key = st.text_input("PINECONE_API_KEY", value="{}".format(PINECONE_API_KEY))        
-        pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value="{}".format(PINECONE_ENVIRONMENT))
-        pinecone_index = st.text_input("PINECONE_INDEX", value="{}".format(PINECONE_INDEX))
-        
  
     if st.button("Enter credentials") or st.session_state.get("credentials_entered", False):
         # Validate inputs
