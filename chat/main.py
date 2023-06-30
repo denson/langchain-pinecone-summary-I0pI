@@ -53,7 +53,7 @@ def get_conversation_string():
 
 def main():
 
-    PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+    
     PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
     PINECONE_INDEX = os.getenv("PINECONE_INDEX")
 
@@ -66,16 +66,16 @@ def main():
 
 
         openai_api_key = st.text_input("OpenAI API key", type="password")
-        prefill_pinecone_api_key = "{}".format(PINECONE_API_KEY)
+        
         prefill_pinecone_environment = "{}".format(PINECONE_ENVIRONMENT)
         prefill_pinecone_index = "{}".format(PINECONE_INDEX)
 
       
-        pinecone_api_key = st.text_input("PINECONE_API_KEY", value=prefill_pinecone_api_key)    
+        pinecone_api_key = st.text_input("PineCone API Key", type="password")
         pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value=prefill_pinecone_environment)
         pinecone_index = st.text_input("PINECONE_INDEX", value=prefill_pinecone_index)
 
-        pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
+        pinecone.init(api_key=pinecone_api_key, environment=PINECONE_ENVIRONMENT)
         index = pinecone.Index(PINECONE_INDEX)
  
     if st.button("Enter credentials") or st.session_state.get("credentials_entered", False):
