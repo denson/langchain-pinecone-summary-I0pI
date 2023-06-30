@@ -67,14 +67,14 @@ def main():
         pinecone_api_key = st.text_input("PINECONE_API_KEY", value="{}".format(PINECONE_API_KEY), type="password")        
         pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value="{}".format(PINECONE_ENVIRONMENT))
         pinecone_index = st.text_input("PINECONE_INDEX", value="{}".format(PINECONE_INDEX))
-
+        
     if st.button("Enter credentials") or st.session_state.get("credentials_entered", False):
         # Validate inputs
         if not openai_api_key or not pinecone_api_key or not pinecone_env or not pinecone_index:
             st.warning(f"Please provide the missing fields.")
 
         else:
-            os.environ["OPENAI_API_KEY"] = openai_api_key
+            openai.api_key = openai_api_key
             # Set flag indicating credentials are entered
             st.session_state["credentials_entered"] = True
 
@@ -87,7 +87,7 @@ def main():
             if 'requests' not in st.session_state:
                 st.session_state['requests'] = []
 
-            llm = ChatOpenAI(model_name="gpt-4-0613", openai_api_key=openai_api_key)
+            llm = ChatOpenAI(model_name="gpt-4-0613", temperature=0.0, top_p=1, frequency_penalty=0, presence_penalty=0) 
 
             if 'buffer_memory' not in st.session_state:
                         st.session_state.buffer_memory=ConversationBufferWindowMemory(k=3,return_messages=True)
