@@ -15,7 +15,9 @@ import streamlit as st
 from streamlit_chat import message
 # from utils import *
 
-
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
+PINECONE_INDEX = os.getenv("PINECONE_INDEX")
 
 pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
 index = pinecone.Index(PINECONE_INDEX)
@@ -57,9 +59,7 @@ def get_conversation_string():
 
 st.subheader("Chatbot with Langchain, ChatGPT, Pinecone, and Streamlit")
 with st.sidebar:
-    PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-    PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
-    PINECONE_INDEX = os.getenv("PINECONE_INDEX")
+
     openai_api_key = st.text_input("OpenAI API key", type="password")
     pinecone_api_key = st.text_input("PINECONE_API_KEY", value="{}".format(PINECONE_API_KEY), type="password")        
     pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value="{}".format(PINECONE_ENVIRONMENT))
