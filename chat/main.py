@@ -1,3 +1,7 @@
+import pinecone
+import openai
+import os
+
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
