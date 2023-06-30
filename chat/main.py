@@ -33,7 +33,7 @@ def find_match(input,top_k=5):
 def query_refiner(conversation, query):
 
     response = openai.Completion.create(
-    model="gpt-4-0613",
+    model="text-davinci-003",
     prompt=f"Given the following user query and conversation log, formulate a question that would be the most relevant to provide the user with an answer from a knowledge base.\n\nCONVERSATION LOG: \n{conversation}\n\nQuery: {query}\n\nRefined Query:",
     temperature=0.7,
     max_tokens=256,
@@ -70,11 +70,9 @@ def main():
         prefill_pinecone_environment = "{}".format(PINECONE_ENVIRONMENT)
         prefill_pinecone_index = "{}".format(PINECONE_INDEX)
 
-        st.write(os.getenv("PINECONE_API_KEY"))
+      
         pinecone_api_key = st.text_input("PINECONE_API_KEY", value=prefill_pinecone_api_key)    
-        st.write(prefill_pinecone_environment)    
         pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value=prefill_pinecone_environment)
-        st.write(prefill_pinecone_index) 
         pinecone_index = st.text_input("PINECONE_INDEX", value=prefill_pinecone_index)
 
         pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
