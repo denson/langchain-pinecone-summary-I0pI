@@ -15,9 +15,7 @@ import streamlit as st
 from streamlit_chat import message
 # from utils import *
 
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
-PINECONE_INDEX = os.getenv("PINECONE_INDEX")
+
 
 pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
 index = pinecone.Index(PINECONE_INDEX)
@@ -58,9 +56,11 @@ def get_conversation_string():
 
 
 st.subheader("Chatbot with Langchain, ChatGPT, Pinecone, and Streamlit")
-
+### credentials
 with st.sidebar:
-
+    PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+    PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
+    PINECONE_INDEX = os.getenv("PINECONE_INDEX")
     openai_api_key = st.text_input("OpenAI API key", type="password")
     pinecone_api_key = st.text_input("PINECONE_API_KEY", value="{}".format(PINECONE_API_KEY), type="password")        
     pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value="{}".format(PINECONE_ENVIRONMENT))
@@ -71,37 +71,37 @@ if st.button("Enter credentials"):
     if not openai_api_key or not pinecone_api_key or not pinecone_env or not pinecone_index:
         st.warning(f"Please provide the missing fields.")
 
-else:
+    else:
+        ### chat functionality
+        if 'responses' not in st.session_state:
+            st.session_state['responses'] = ["How can I assist you?"]
 
-    if 'responses' not in st.session_state:
-        st.session_state['responses'] = ["How can I assist you?"]
+        if 'requests' not in st.session_state:
+            st.session_state['requests'] = []
 
-    if 'requests' not in st.session_state:
-        st.session_state['requests'] = []
+        llm = ChatOpenAI(model_name="gpt-4-0613", openai_api_key=openai_api_key)
 
-    llm = ChatOpenAI(model_name="gpt-4-0613", openai_api_key=openai_api_key)
-
-    if 'buffer_memory' not in st.session_state:
-                st.session_state.buffer_memory=ConversationBufferWindowMemory(k=3,return_messages=True)
-
-
-    system_msg_template = SystemMessagePromptTemplate.from_template(template="""Answer the question as truthfully as possible using the provided context, 
-    and if the answer is not contained within the text below, say 'I don't know'""")
+        if 'buffer_memory' not in st.session_state:
+                    st.session_state.buffer_memory=ConversationBufferWindowMemory(k=3,return_messages=True)
 
 
-    human_msg_template = HumanMessagePromptTemplate.from_template(template="{input}")
-
-    prompt_template = ChatPromptTemplate.from_messages([system_msg_template, MessagesPlaceholder(variable_name="history"), human_msg_template])
-
-    conversation = ConversationChain(memory=st.session_state.buffer_memory, prompt=prompt_template, llm=llm, verbose=True)
+        system_msg_template = SystemMessagePromptTemplate.from_template(template="""Answer the question as truthfully as possible using the provided context, 
+        and if the answer is not contained within the text below, say 'I don't know'""")
 
 
+        human_msg_template = HumanMessagePromptTemplate.from_template(template="{input}")
+
+        prompt_template = ChatPromptTemplate.from_messages([system_msg_template, MessagesPlaceholder(variable_name="history"), human_msg_template])
+
+        conversation = ConversationChain(memory=st.session_state.buffer_memory, prompt=prompt_template, llm=llm, verbose=True)
 
 
-    # container for chat history
-    response_container = st.container()
-    # container for text box
-    textcontainer = st.container()
+
+
+        # container for chat history
+        response_container = st.container()
+        # container for text box
+        textcontainer = st.container()
 
 
     with textcontainer:
