@@ -67,13 +67,18 @@ with st.sidebar:
     pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value="{}".format(PINECONE_ENVIRONMENT))
     pinecone_index = st.text_input("PINECONE_INDEX", value="{}".format(PINECONE_INDEX))
 
-if st.button("Enter credentials"):
+if st.button("Enter credentials") or st.session_state.get("credentials_entered", False)::
     # Validate inputs
     if not openai_api_key or not pinecone_api_key or not pinecone_env or not pinecone_index:
         st.warning(f"Please provide the missing fields.")
 
     else:
-        ### chat functionality
+        # Set flag indicating credentials are entered
+        st.session_state["credentials_entered"] = True
+
+        # Chat functionality starts here since all credentials are provided
+        # Initialize session state if not already done
+
         if 'responses' not in st.session_state:
             st.session_state['responses'] = ["How can I assist you?"]
 
