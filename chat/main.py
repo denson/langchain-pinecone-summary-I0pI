@@ -70,7 +70,7 @@ def main():
         prefill_pinecone_environment = "{}".format(PINECONE_ENVIRONMENT)
         prefill_pinecone_index = "{}".format(PINECONE_INDEX)
 
-        st.write(prefill_pinecone_api_key)
+        st.write(os.getenv("PINECONE_API_KEY"))
         pinecone_api_key = st.text_input("PINECONE_API_KEY", value=prefill_pinecone_api_key)    
         st.write(prefill_pinecone_environment)    
         pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value=prefill_pinecone_environment)
