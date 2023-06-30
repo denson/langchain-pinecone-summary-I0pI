@@ -70,8 +70,8 @@ def main():
         pinecone_api_key = st.text_input("PINECONE_API_KEY", value="{}".format(PINECONE_API_KEY), type="password")        
         pinecone_env = st.text_input("PINECONE_ENVIRONMENT", value="{}".format(PINECONE_ENVIRONMENT))
         pinecone_index = st.text_input("PINECONE_INDEX", value="{}".format(PINECONE_INDEX))
-        with st.echo():
-            st.write("{}".format(PINECONE_API_KEY)) 
+        
+        st.write("{}".format(pinecone_api_key)) 
     if st.button("Enter credentials") or st.session_state.get("credentials_entered", False):
         # Validate inputs
         if not openai_api_key or not pinecone_api_key or not pinecone_env or not pinecone_index:
