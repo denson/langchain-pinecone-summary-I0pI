@@ -19,7 +19,7 @@ from streamlit_chat import message
 
 
 
-def find_match(input,top_k=5):
+def find_match(input,index,top_k=5):
     # input_em = model.encode(input).tolist()
     EMBEDDING_MODEL = "text-embedding-ada-002"
     input_em = openai.Embedding.create(
@@ -131,7 +131,7 @@ def main():
                         refined_query = query_refiner(conversation_string, query)
                         st.subheader("Refined Query:")
                         st.write(refined_query)
-                        context = find_match(refined_query)
+                        context = find_match(refined_query,index)
                         # print(context)  
                         response = conversation.predict(input=f"Context:\n {context} \n\n Query:\n{query}")
                     st.session_state.requests.append(query)
