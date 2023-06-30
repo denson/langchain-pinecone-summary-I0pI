@@ -92,7 +92,7 @@ def main():
             # Initialize session state if not already done
 
             if 'responses' not in st.session_state:
-                st.session_state['responses'] = ["How can I assist you?"]
+                st.session_state['responses'] = ["Welcome to the large language model knowledge base."]
 
             if 'requests' not in st.session_state:
                 st.session_state['requests'] = []
